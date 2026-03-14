@@ -5,8 +5,10 @@ int b;
 
 int func(int p)
 {
+  int _;
   p = p - 1;
-  return p;
+  _ = p;
+  return _;
 }
 
 int main()

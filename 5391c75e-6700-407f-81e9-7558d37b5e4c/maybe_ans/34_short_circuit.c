@@ -4,9 +4,11 @@ int g, i;
 
 int func(int n)
 {
+  int _;
   g = g + n;
   printf("%d", g);
-  return g;
+  _ = g;
+  return _;
 }
 
 int main()

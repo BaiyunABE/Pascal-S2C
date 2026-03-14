@@ -1,77 +1,84 @@
-program main;
-const
-  modn = 1000000007;
+#include <stdio.h>
 
-var
-  dp: array[0..17, 0..17, 0..17, 0..17, 0..17, 0..6] of integer;
-  list: array[0..199] of integer;
-  cns: array[1..19] of integer;
-  n: integer;
-  i, j, k, l, m, h: integer;
-  ans: integer;
+const int modn = 1000000007;
 
-function equal(a, b: integer): integer;
-begin
-  if a = b then
-    equal := 1
+int dp[18][18][18][18][18][7];
+int list[200];
+int cns[20];
+int n;
+int i, j, k, l, m, h;
+int ans;
+
+int equal(int a, int b)
+{
+  int _;
+  if (a == b)
+    _ = 1;
   else
-    equal := 0;
-end;
+    _ = 0;
+  return _;
+}
 
-function dfs(a, b, c, d, e, last: integer): integer;
-var anss:integer;
-begin
-  if dp[a, b, c, d, e, last] <> -1 then
-    dfs := dp[a, b, c, d, e, last];
-  if a + b + c + d + e = 0 then
-    dfs := 1
+int dfs(int a, int b, int c, int d, int e, int last)
+{
+  int _;
+  int anss;
+  if (dp[a][b][c][d][e][last] != -1)
+  {
+    _ = dp[a][b][c][d][e][last];
+  }
+  if (a + b + c + d + e == 0)
+    _ = 1;
   else
-  begin
-    anss := 0;
+  {
+    anss = 0;
 
-    if a <> 0 then
-      anss := (anss + (a - equal(last, 2)) * dfs(a - 1, b, c, d, e, 1)) mod modn;
-    if b <> 0 then
-      anss := (anss + (b - equal(last, 3)) * dfs(a + 1, b - 1, c, d, e, 2)) mod modn;
-    if c <> 0 then
-      anss := (anss + (c - equal(last, 4)) * dfs(a, b + 1, c - 1, d, e, 3)) mod modn;
-    if d <> 0 then
-      anss := (anss + (d - equal(last, 5)) * dfs(a, b, c + 1, d - 1, e, 4)) mod modn;
-    if e <> 0 then
-      anss := (anss + e * dfs(a, b, c, d + 1, e - 1, 5)) mod modn;
-    dp[a, b, c, d, e, last] := anss mod modn;
-    dfs := dp[a, b, c, d, e, last];
-  end;
-end;
+    if (a != 0)
+      anss = (anss + (a - equal(last, 2)) * dfs(a - 1, b, c, d, e, 1)) % modn;
+    if (b != 0)
+      anss = (anss + (b - equal(last, 3)) * dfs(a + 1, b - 1, c, d, e, 2)) % modn;
+    if (c != 0)
+      anss = (anss + (c - equal(last, 4)) * dfs(a, b + 1, c - 1, d, e, 3)) % modn;
+    if (d != 0)
+      anss = (anss + (d - equal(last, 5)) * dfs(a, b, c + 1, d - 1, e, 4)) % modn;
+    if (e != 0)
+      anss = (anss + e * dfs(a, b, c, d + 1, e - 1, 5)) % modn;
+    dp[a][b][c][d][e][last] = anss % modn;
+    _ = dp[a][b][c][d][e][last];
+  }
+  return _;
+}
 
-begin
-  read(n);
+int main()
+{
+  scanf("%d", &n);
 
-  for i := 0 to 17 do
-  begin
-    for j := 0 to 17 do
-    begin
-      for k := 0 to 17 do
-      begin
-        for l := 0 to 17 do
-        begin
-          for m := 0 to 17 do
-          begin
-            for h := 0 to 6 do
-              dp[i, j, k, l, m, h] := -1;
-          end;
-        end;
-      end;
-    end;
-  end;
+  for (i = 0; i <= 17; i++)
+  {
+    for (j = 0; j <= 17; j++)
+    {
+      for (k = 0; k <= 17; k++)
+      {
+        for (l = 0; l <= 17; l++)
+        {
+          for (m = 0; m <= 17; m++)
+          {
+            for (h = 0; h <= 6; h++)
+              dp[i][j][k][l][m][h] = -1;
+          }
+        }
+      }
+    }
+  }
 
-  for i := 0 to n - 1 do
-  begin
-    read(list[i]);
-    cns[list[i]] := cns[list[i]] + 1;
-  end;
+  for (i = 0; i <= n - 1; i++)
+  {
+    scanf("%d", &list[i]);
+    cns[list[i]] = cns[list[i]] + 1;
+  }
 
-  ans := dfs(cns[1], cns[2], cns[3], cns[4], cns[5], 0);
+  ans = dfs(cns[1], cns[2], cns[3], cns[4], cns[5], 0);
 
-  write(ans);
-end.
+  printf("%d", ans);
+  return 0;
+}

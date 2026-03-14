@@ -1,80 +1,85 @@
-program main;
-var 
-arr: array[0..109] of integer;
-n: integer;
-m, a, b, k, loc, i: integer;
-flag: boolean;
+#include <stdio.h>
+#include <stdbool.h>
 
-procedure init(n: integer);
-var i: integer;
-begin
-  for i := 1 to n * n + 1 do
-    arr[i] := -1;
-end;
+int arr[110];
+int n;
+int m, a, b, k, loc, i;
+bool flag;
 
-function findfa(a: integer):integer;
-begin
-  if arr[a] = a then
-    findfa := a
+void init(int n)
+{
+  int i;
+  for (i = 1; i <= n * n + 1; i++)
+    arr[i] = -1;
+}
+
+int findfa(int a)
+{
+  int _;
+  if (arr[a] == a)
+    _ = a;
   else
-  begin
-    arr[a] := findfa(arr[a]);
-    findfa := arr[a];
-  end;
-end;
+  {
+    arr[a] = findfa(arr[a]);
+    _ = arr[a];
+  }
+  return _;
+}
 
-procedure mmerge(a, b: integer);
-var m, n: integer;
-begin
-  m := findfa(a);
-  n := findfa(b);
-  if m <> n then
-    arr[m] := n;
-end;
+void mmerge(int a, int b)
+{
+  int m, n;
+  m = findfa(a);
+  n = findfa(b);
+  if (m != n)
+    arr[m] = n;
+}
 
-begin
-  n := 4;
-  m := 10;
-  flag := false;
+int main()
+{
+  n = 4;
+  m = 10;
+  flag = false;
   init(n);
-  k := n * n + 1;
+  k = n * n + 1;
 
-  for i := 0 to m - 1 do
-  begin
-    read(a);
-    read(b);
-    if flag = false then
-    begin
-      loc := n * (a - 1) + b;
-      arr[loc] := loc;
-      if a = 1 then
-      begin
-        arr[0] := 0;
+  for (i = 0; i <= m - 1; i++)
+  {
+    scanf("%d", &a);
+    scanf("%d", &b);
+    if (flag == false)
+    {
+      loc = n * (a - 1) + b;
+      arr[loc] = loc;
+      if (a == 1)
+      {
+        arr[0] = 0;
         mmerge(loc, 0);
-      end;
-      if a = n then
-      begin
-        arr[k] := k;
+      }
+      if (a == n)
+      {
+        arr[k] = k;
         mmerge(loc, k);
-      end;
+      }
 
-      if (b < n) and (arr[loc + 1] <> -1) then
+      if ((b < n) && (arr[loc + 1] != -1))
         mmerge(loc, loc + 1);
-      if (b > 1) and (arr[loc - 1] <> -1) then
+      if ((b > 1) && (arr[loc - 1] != -1))
         mmerge(loc, loc - 1);
-      if (a < n) and (arr[loc + n] <> -1) then
+      if ((a < n) && (arr[loc + n] != -1))
         mmerge(loc, loc + n);
-      if (a > 1) and (arr[loc - n] <> -1) then
+      if ((a > 1) && (arr[loc - n] != -1))
         mmerge(loc, loc - n);
 
-      if (arr[0] <> -1) and (arr[k] <> -1) and (findfa(0) = findfa(k)) then
-      begin
-        flag := true;
-        write(i + 1);
-      end;
-    end;
-  end;
+      if ((arr[0] != -1) && (arr[k] != -1) && (findfa(0) == findfa(k)))
+      {
+        flag = true;
+        printf("%d", i + 1);
+      }
+    }
+  }
 
-  if flag = false then
-    write(-1);
-end.
+  if (flag == false)
+    printf("%d", -1);
+  return 0;
+}

@@ -1,11 +1,52 @@
-program main中的变量->全局变量
+`program`中的变量映射到全局变量，过程/函数中的变量映射到局部变量，函数返回值固定存于局部变量`_`
 
-过程/函数中的变量->局部变量
+`begin/end`与`{}`建立严格映射
 
-00-07 格式串
+`06_func_defn.pas`
+
+```pascal
+program main;
+var
+  a: integer;
+  b: integer;
+  
+function func(p: integer): integer;
+begin
+  p := p - 1;
+  func := p;
+end;
+
+begin
+  a := 10;
+  b := func(a);
+
+  write(b);
+end.
+```
+
+`06_func_defn.c`
 
 ```c
-  printf("%d", a);
+#include <stdio.h>
+
+int a;
+int b;
+
+int func(int p)
+{
+  int _;
+  p = p - 1;
+  _ = p;
+  return _;
+}
+
+int main()
+{
+  a = 10;
+  b = func(a);
+  printf("%d", b);
+  return 0;
+}
 ```
 
 14-10 类型转换
@@ -14,21 +55,9 @@ program main中的变量->全局变量
   c = (float)a / (float)b;
 ```
 
-21-16 暂存返回值_func，return _func;
-
-```c
-    ifWhile_result = b; // 赋值给暂存变量
-```
-
-26-14 算符优先级
-
-```c
-  if (((a - b * c) != (d - a / c)) || ((a * b / c) == (e + d)) || ((a + b + c) == (d + e)))
-```
-
 26-20 输出常量
 
 ```c
-    printf("1");
+    printf("%d", 1);
 ```
 

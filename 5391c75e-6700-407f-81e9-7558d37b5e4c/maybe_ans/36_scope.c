@@ -4,17 +4,18 @@ int a, sum, i;
 
 int func()
 {
+  int _;
   int b, a;
-  
   b = 7;
   a = 1;
   if (a == b)
   {
     a = a + 1;
-    return 1;
+    _ = 1;
   }
   else
-    return 0;
+    _ = 0;
+  return _;
 }
 
 int main()

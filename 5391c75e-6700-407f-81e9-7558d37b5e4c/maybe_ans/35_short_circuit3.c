@@ -17,20 +17,26 @@ int i0, i1, i2, i3, i4;
 
 int set_a(int val)
 {
+  int _;
   a = val;
-  return val;
+  _ = val;
+  return _;
 }
 
 int set_b(int val)
 {
+  int _;
   b = val;
-  return val;
+  _ = val;
+  return _;
 }
 
 int set_d(int val)
 {
+  int _;
   d = val;
-  return val;
+  _ = val;
+  return _;
 }
 
 int main()

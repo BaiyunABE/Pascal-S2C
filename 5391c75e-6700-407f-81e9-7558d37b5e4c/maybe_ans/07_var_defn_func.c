@@ -4,7 +4,9 @@ int a;
 
 int defn()
 {
-  return 4;
+  int _;
+  _ = 4;
+  return _;
 }
 
 int main()

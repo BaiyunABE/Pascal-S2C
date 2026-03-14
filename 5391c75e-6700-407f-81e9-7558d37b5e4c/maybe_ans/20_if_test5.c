@@ -2,6 +2,7 @@
 
 int if_if_Else()
 {
+  int _;
   int a, b;
   a = 5;
   b = 10;
@@ -11,10 +12,9 @@ int if_if_Else()
       a = 25;
   }
   else
-  {
     a = a + 15;
-  }
-  return a;
+  _ = a;
+  return _;
 }
 
 int main()

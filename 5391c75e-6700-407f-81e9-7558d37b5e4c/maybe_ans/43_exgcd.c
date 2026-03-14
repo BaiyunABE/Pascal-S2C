@@ -1,36 +1,38 @@
-program main;
+#include <stdio.h>
 
-var
-  x, y: array[0..0] of integer;
-  a, b: integer;
+int x[1];
+int y[1];
+int a, b;
 
-function exgcd(a, b: integer; var x, y: integer): integer;
-var
-  t, r: integer;
-begin
-  if b = 0 then
-  begin
-    x := 1;
-    y := 0;
-    exgcd := a;
-  end
+int exgcd(int a, int b, int *x, int *y)
+{
+  int _;
+  int t, r;
+  if (b == 0)
+  {
+    *x = 1;
+    *y = 0;
+    _ = a;
+  }
   else
-  begin
-    r := exgcd(b, a mod b, x, y);
-    t := x;
-    x := y;
-    y := (t - (a div b) * y);
-    exgcd := r;
-  end;
-end;
+  {
+    r = exgcd(b, a % b, x, y);
+    t = *x;
+    *x = *y;
+    *y = (t - (a / b) * (*y));
+    _ = r;
+  }
+  return _;
+}
 
-
-begin
-  a := 7;
-  b := 15;
-  x[0] := 1;
-  y[0] := 1;
-  exgcd(a, b, x[0], y[0]);
-  x[0] := ((x[0] mod b) + b) mod b;
-  write(x[0]);
-end.
+int main()
+{
+  a = 7;
+  b = 15;
+  x[0] = 1;
+  y[0] = 1;
+  exgcd(a, b, &x[0], &y[0]);
+  x[0] = ((x[0] % b) + b) % b;
+  printf("%d", x[0]);
+  return 0;
+}

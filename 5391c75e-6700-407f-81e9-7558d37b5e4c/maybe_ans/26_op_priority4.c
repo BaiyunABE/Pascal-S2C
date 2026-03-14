@@ -12,13 +12,11 @@ int main()
   scanf("%d", &d);
   scanf("%d", &e);
   flag = false;
-  if (((a - b * c) != (d - a / c)) || ((a * b / c) == (e + d)) || ((a + b + c) == (d + e)))
+  if ((a - b * c != d - a / c) || (a * b / c == e + d) || (a + b + c == d + e))
   {
     flag = true;
   }
   if (flag)
-  {
-    printf("1");
-  }
+    printf("%d", 1);
   return 0;
 }
