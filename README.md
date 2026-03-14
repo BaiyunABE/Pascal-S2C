@@ -1,2 +1,3 @@
 # Pascal-S2C
-DevIAtiOn
+编译原理课设
+BUPT
