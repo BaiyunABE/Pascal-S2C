@@ -4,7 +4,7 @@ const int modn = 1000000007;
 
 int dp[18][18][18][18][18][7];
 int list[200];
-int cns[20];
+int cns[19];
 int n;
 int i, j, k, l, m, h;
 int ans;
@@ -74,10 +74,10 @@ int main()
   for (i = 0; i <= n - 1; i++)
   {
     scanf("%d", &list[i]);
-    cns[list[i]] = cns[list[i]] + 1;
+    cns[list[i] - 1] = cns[list[i] - 1] + 1;
   }
 
-  ans = dfs(cns[1], cns[2], cns[3], cns[4], cns[5], 0);
+  ans = dfs(cns[1 - 1], cns[2 - 1], cns[3 - 1], cns[4 - 1], cns[5 - 1], 0);
 
   printf("%d", ans);
   return 0;

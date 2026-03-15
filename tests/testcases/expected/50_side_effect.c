@@ -1,42 +1,44 @@
-program main;
-const split = ',';
-var
-  a, b, k, i: integer;
-  
-function inc_a: integer;
-var
-  temp_b: integer;
-begin
-  temp_b := a;
-  temp_b := temp_b + 1;
-  a := temp_b;
-  inc_a := a;
-end;
+#include <stdio.h>
 
-  
-begin
-  a := -1;
-  b := 1;
-  k := 5;
-  
-  for i := 0 to k do
-  begin
-    if (inc_a <> 0) and (inc_a <> 0) and (inc_a <> 0) then
-    begin
-      write(a, b, split);
-    end;
-    
-    if (inc_a < 14) or ((inc_a <> 0) and ((inc_a - inc_a + 1) <> 0)) then
-    begin
-      write(a, split);
-      b := b * 2;
-    end
+const char split = ',';
+int a, b, k, i;
+
+int inc_a()
+{
+  int _;
+  int temp_b;
+  temp_b = a;
+  temp_b = temp_b + 1;
+  a = temp_b;
+  _ = a;
+  return _;
+}
+
+int main()
+{
+  a = -1;
+  b = 1;
+  k = 5;
+
+  for (i = 0; i <= k; i++)
+  {
+    if ((inc_a() != 0) && (inc_a() != 0) && (inc_a() != 0))
+    {
+      printf("%d%d%c", a, b, split);
+    }
+
+    if ((inc_a() < 14) || ((inc_a() != 0) && ((inc_a() - inc_a() + 1) != 0)))
+    {
+      printf("%d%c", a, split);
+      b = b * 2;
+    }
     else
-    begin
-      inc_a;
-    end;
-  end;
-  
-  write(a,b,split);
-  write(a);
-end.
+    {
+      inc_a();
+    }
+  }
+
+  printf("%d%d%c", a, b, split);
+  printf("%d", a);
+  return 0;
+}
