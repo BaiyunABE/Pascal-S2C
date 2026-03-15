@@ -1,62 +1,60 @@
-program NQueens;
-const
-newline = ',';
-blank = ' ';
+#include <stdio.h>
 
-var
-  ans: array[1..50] of integer;
-  sum, n: integer;
-  row: array[1..50] of integer;
-  line1: array[1..50] of integer;
-  line2: array[1..100] of integer;
-  k, i: integer;
+const char newline = ',';
+const char blank = ' ';
 
-procedure printans;
-var
-  i: integer;
-begin
-  sum := sum + 1;
-  for i := 1 to n do
-  begin
-    write(ans[i]);
-    if i = n then
-      write(newline)
+int ans[50];
+int sum, n;
+int row[50];
+int line1[50];
+int line2[100];
+int k, i;
+
+void printans()
+{
+  int i;
+  sum = sum + 1;
+  for (i = 1; i <= n; i++)
+  {
+    printf("%d", ans[i - 1]);
+    if (i == n)
+      printf("%c", newline);
     else
-      write(blank);
-  end;
-end;
+      printf("%c", blank);
+  }
+}
 
-procedure f(step: integer);
-var
-  i: integer;
-begin
-  for i := 1 to n do
-  begin
-    if (row[i] <> 1) and (line1[step + i] = 0) and (line2[n + step - i] = 0) then
-    begin
-      ans[step] := i;
-      if step = n then
-        printans;
-      row[i] := 1;
-      line1[step + i] := 1;
-      line2[n + step - i] := 1;
+void f(int step)
+{
+  int i;
+  for (i = 1; i <= n; i++)
+  {
+    if ((row[i - 1] != 1) && (line1[step + i - 1] == 0) && (line2[n + step - i - 1] == 0))
+    {
+      ans[step - 1] = i;
+      if (step == n)
+        printans();
+      row[i - 1] = 1;
+      line1[step + i - 1] = 1;
+      line2[n + step - i - 1] = 1;
       f(step + 1);
-      row[i] := 0;
-      line1[step + i] := 0;
-      line2[n + step - i] := 0;
-    end;
-  end;
-end;
+      row[i - 1] = 0;
+      line1[step + i - 1] = 0;
+      line2[n + step - i - 1] = 0;
+    }
+  }
+}
 
-
-begin
-  sum := 0;
-  read(k);
-  for i := 1 to k do
-  begin
-    read(n);
+int main()
+{
+  sum = 0;
+  scanf("%d", &k);
+  for (i = 1; i <= k; i++)
+  {
+    scanf("%d", &n);
     f(1);
-  end;
+  }
 
-  write(sum);
-end.
+  printf("%d", sum);
+  return 0;
+}

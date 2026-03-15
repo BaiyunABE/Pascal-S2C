@@ -1,75 +1,89 @@
-program main;
-const
-RADIUS = 5.5; PI = 03.141595653589793; EPS = 0.000001;
-EVAL1 = 95.033188;
-CONV1 = 233;
-MAX = 1000000000;
-TWO = 2.9; THREE = 3; FIVE = 5;
-e = 'e'; o = 'o';
+#include <stdio.h>
+#include <stdbool.h>
 
-var p:integer;
-arr: array[0..9] of real;
-input, area, area_trunc: real;
+const float RADIUS = 5.5;
+const float PI = 03.141595653589793;
+const float EPS = 0.000001;
+const float EVAL1 = 95.033188;
+const int CONV1 = 233;
+const int MAX = 1000000000;
+const float TWO = 2.9;
+const int THREE = 3;
+const int FIVE = 5;
+const char e = 'e';
+const char o = 'o';
 
-function float_abs(x: real):real;
-begin
-  if x < 0 then
-    float_abs := -x
+int p;
+float arr[10];
+float input, area, area_trunc;
+
+float float_abs(float x)
+{
+  float _;
+  if (x < 0)
+    _ = -x;
   else
-    float_abs := x;
-end;
+    _ = x;
+  return _;
+}
 
-function circle_area(radius: integer):real;
-begin
-  circle_area := (PI * radius *radius + (radius * radius) * PI) / 2;
-end;
+float circle_area(int radius)
+{
+  float _;
+  _ = (PI * radius * radius + (radius * radius) * PI) / 2;
+  return _;
+}
 
-function float_eq(a,b: real):integer;
-begin
-  if float_abs(a - b) < EPS then
-    float_eq := 1
+int float_eq(float a, float b)
+{
+  int _;
+  if (float_abs(a - b) < EPS)
+    _ = 1;
   else
-    float_eq := 0
-end;
+    _ = 0;
+  return _;
+}
 
-procedure error();
-begin
-  write(e);
-end;
+void error()
+{
+  printf("%c", e);
+}
 
-procedure ok();
-begin
-  write(o);
-end;
+void ok()
+{
+  printf("%c", o);
+}
 
-procedure assert(cond: integer);
-begin 
-  if cond = 0 then
-    error()
-  else
-    ok();
-end;
-
-begin
-  assert(float_eq(circle_area(5), circle_area(FIVE)));
-  if 1.5 <> 0.0 then
-    ok();
-  if (not (3.3 = 0.0)) then
-    ok();
-  if (0.0 <> 0.0) and (3 <> 0.0) then
+void assert(int cond)
+{
+  if (cond == 0)
     error();
-  if (0 <> 0.0) or (0.3 <> 0.0) then
+  else
+    ok();
+}
+
+int main()
+{
+  assert(float_eq(circle_area(5), circle_area(FIVE)));
+  if (1.5 != 0.0)
+    ok();
+  if (!(3.3 == 0.0))
+    ok();
+  if ((0.0 != 0.0) && (3 != 0.0))
+    error();
+  if ((0 != 0.0) || (0.3 != 0.0))
     ok();
 
-  p := 0;
-  arr[0] := 1.0;
-  arr[1] := 2.0;
-  input := 0.520;
-  area := PI * input * input;
-  area_trunc := circle_area(0);
-  arr[p] := arr[p] + input;
+  p = 0;
+  arr[0] = 1.0;
+  arr[1] = 2.0;
+  input = 0.520;
+  area = PI * input * input;
+  area_trunc = circle_area(0);
+  arr[p] = arr[p] + input;
 
-  write(area);
-  write(area_trunc);
-  write(arr[0]);
-end.
+  printf("%f", area);
+  printf("%f", area_trunc);
+  printf("%f", arr[0]);
+  return 0;
+}

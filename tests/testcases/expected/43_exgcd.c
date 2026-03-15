@@ -16,10 +16,10 @@ int exgcd(int a, int b, int *x, int *y)
   }
   else
   {
-    r = exgcd(b, a % b, x, y);
+    r = exgcd(b, a % b, &*x, &*y);
     t = *x;
     *x = *y;
-    *y = (t - (a / b) * (*y));
+    *y = (t - (a / b) * *y);
     _ = r;
   }
   return _;

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int if_ifElse_()
+int if_if_Else()
 {
   int _;
   int a, b;
@@ -10,15 +10,15 @@ int if_ifElse_()
   {
     if (b == 10)
       a = 25;
-    else
-      a = a + 15;
   }
+  else
+    a = a + 15;
   _ = a;
   return _;
 }
 
 int main()
 {
-  printf("%d", if_ifElse_());
+  printf("%d", if_if_Else());
   return 0;
 }

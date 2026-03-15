@@ -1,44 +1,47 @@
-program main;
-var ret: integer;
-a: array[0..60, 0..66] of integer;
-b: array[0..52, 0..58] of integer;
+#include <stdio.h>
 
-function func(aa: integer; c: integer; e, f: integer; h, i: integer): integer;
-var
-  index: integer;
-begin
-  index := 0;
-  while (index < 10) do
-  begin
-    write(b[aa, index]);
-    index := index + 1;
-  end;
+int ret;
+int a[61][67];
+int b[53][59];
 
-  write(a[17, c]);
+int func(int aa, int c, int e, int f, int h, int i)
+{
+  int _;
+  int index;
+  index = 0;
+  while (index < 10)
+  {
+    printf("%d", b[aa][index]);
+    index = index + 1;
+  }
 
-  while (i < 10) do
-  begin
-    b[6, i] := h * 128875 mod 3724;
-    i := i + 1;
-    h := h + 7;
-  end;
+  printf("%d", a[17][c]);
 
-  func := e + f;
-end;
+  while (i < 10)
+  {
+    b[6][i] = h * 128875 % 3724;
+    i = i + 1;
+    h = h + 7;
+  }
 
+  _ = e + f;
+  return _;
+}
 
-begin
-    a[17, 1] := 6;
-    a[17, 3] := 7;
-    a[17, 4] := 4;
-    a[17, 7] := 9;
-    a[17, 11] := 11;
+int main()
+{
+  a[17][1] = 6;
+  a[17][3] = 7;
+  a[17][4] = 4;
+  a[17][7] = 9;
+  a[17][11] = 11;
 
-    b[6, 1] := 1;
-    b[6, 2] := 2;
-    b[6, 3] := 3;
-    b[6, 9] := 9;
+  b[6][1] = 1;
+  b[6][2] = 2;
+  b[6][3] = 3;
+  b[6][9] = 9;
 
-    ret :=  func(a[17, 1], a[17, 3],b[6, 3], b[6, 0], b[34, 4], b[51, 18]) * 3;
-    write(ret);
-end.
+  ret = func(a[17][1], a[17][3], b[6][3], b[6][0], b[34][4], b[51][18]) * 3;
+  printf("%d", ret);
+  return 0;
+}

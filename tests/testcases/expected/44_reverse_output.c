@@ -1,25 +1,26 @@
-program main;
-var
-  i: integer;
+#include <stdio.h>
 
-procedure reverse(n: integer);
-var
-  next: integer;
-begin
-  if n <= 1 then
-  begin
-    read(next);
-    write(next);
-  end
+int i;
+
+void reverse(int n)
+{
+  int next;
+  if (n <= 1)
+  {
+    scanf("%d", &next);
+    printf("%d", next);
+  }
   else
-  begin
-    read(next);
+  {
+    scanf("%d", &next);
     reverse(n - 1);
-    write(next);
-  end;
-end;
+    printf("%d", next);
+  }
+}
 
-begin
-  i := 200;
+int main()
+{
+  i = 200;
   reverse(i);
-end.
+  return 0;
+}

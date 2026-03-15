@@ -1,30 +1,32 @@
-program Hanoi;
-const split = ',';
-var
-    n, t, i: integer;
+#include <stdio.h>
 
-procedure move(x, y: integer);
-begin
-    write(x,y,split);
-end;
+const char split = ',';
+int n, t, i;
 
-procedure hanoi(n, one, two, three: integer);
-begin
-    if n = 1 then
-        move(one, three)
+void move(int x, int y)
+{
+    printf("%d%d%c", x, y, split);
+}
+
+void hanoi(int n, int one, int two, int three)
+{
+    if (n == 1)
+        move(one, three);
     else
-    begin
+    {
         hanoi(n - 1, one, three, two);
         move(one, three);
         hanoi(n - 1, two, one, three);
-    end;
-end;
+    }
+}
 
-begin
-    read(n);
-    for i := 1 to n do
-    begin
-        read(t);
+int main()
+{
+    scanf("%d", &n);
+    for (i = 1; i <= n; i++)
+    {
+        scanf("%d", &t);
         hanoi(t, 1, 2, 3);
-    end;
-end.
+    }
+    return 0;
+}
