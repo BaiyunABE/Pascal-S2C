@@ -133,7 +133,7 @@ else
 
 
 
-- Pascal数组可任意指定下界，需要存储数组的下界`lb`和上界`ub`，数组长度为`ub - lb + 1`，对下标`i`的访问需要修正为`(i) - lb`
+- Pascal数组可任意指定下界，需要存储数组的下界`lb`和上界`ub`，数组长度为`ub - lb + 1`，对下标`i`的访问需要修正为`i - lb`
 
 `42_color.pas`
 
@@ -162,3 +162,57 @@ for (i = 0; i <= n - 1; i++)
 
 ans = dfs(cns[1 - 1], cns[2 - 1], cns[3 - 1], cns[4 - 1], cns[5 - 1], 0);
 ```
+
+
+
+- 用指针实现引用传递
+
+`43_exgcd.pas`
+
+```pascal
+function exgcd(a, b: integer; var x, y: integer): integer;
+var
+  t, r: integer;
+begin
+  if b = 0 then
+  begin
+    x := 1;
+    y := 0;
+    exgcd := a;
+  end
+  else
+  begin
+    r := exgcd(b, a mod b, x, y);
+    t := x;
+    x := y;
+    y := (t - (a div b) * y);
+    exgcd := r;
+  end;
+end;
+```
+
+`43_exgcd.c`
+
+```c
+int exgcd(int a, int b, int *x, int *y)
+{
+  int _;
+  int t, r;
+  if (b == 0)
+  {
+    *x = 1;
+    *y = 0;
+    _ = a;
+  }
+  else
+  {
+    r = exgcd(b, a % b, &*x, &*y);
+    t = *x;
+    *x = *y;
+    *y = (t - (a / b) * *y);
+    _ = r;
+  }
+  return _;
+}
+```
+
