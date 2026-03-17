@@ -109,10 +109,6 @@ value_parameter : idlist ":" basic_type
 subprogram_body : const_declarations
                 | var_declarations
                 | compound_statement
-
-compound_statement : "begin" statement_list "end"
-statement_list : statement
-               | statement_list ";" statement
 ```
 
 
@@ -127,6 +123,10 @@ procedure p(x, y: real; var b, c: integer);
 ## 语句
 
 ```
+compound_statement : "begin" statement_list "end"
+statement_list : statement
+               | statement_list ";" statement
+
 statement : %empty
           | variable ASSIGNOP expression
           | FUNC_ID ASSIGNOP expression
