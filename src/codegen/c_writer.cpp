@@ -2,33 +2,41 @@
 
 #include <stdexcept>
 
-namespace pascal_s2c {
+namespace pascal_s2c
+{
 
-void CWriter::indent() {
-    ++indentLevel_;
-}
-
-void CWriter::dedent() {
-    if (indentLevel_ == 0) {
-        throw std::runtime_error("cannot dedent below zero");
+    void CWriter::indent()
+    {
+        ++indentLevel_;
     }
-    --indentLevel_;
-}
 
-void CWriter::writeLine(const std::string& line) {
-    out_ << indentText() << line << '\n';
-}
+    void CWriter::dedent()
+    {
+        if (indentLevel_ == 0)
+        {
+            throw std::runtime_error("cannot dedent below zero");
+        }
+        --indentLevel_;
+    }
 
-void CWriter::writeRaw(const std::string& text) {
-    out_ << text;
-}
+    void CWriter::writeLine(const std::string &line)
+    {
+        out_ << indentText() << line << '\n';
+    }
 
-std::string CWriter::str() const {
-    return out_.str();
-}
+    void CWriter::writeRaw(const std::string &text)
+    {
+        out_ << text;
+    }
 
-std::string CWriter::indentText() const {
-    return std::string(static_cast<std::size_t>(indentLevel_) * 2U, ' ');
-}
+    std::string CWriter::str() const
+    {
+        return out_.str();
+    }
 
-}  // namespace pascal_s2c
+    std::string CWriter::indentText() const
+    {
+        return std::string(static_cast<std::size_t>(indentLevel_) * 2U, ' ');
+    }
+
+} // namespace pascal_s2c

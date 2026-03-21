@@ -4,11 +4,13 @@
 
 #include "lexer/token.h"
 
-namespace pascal_s2c {
+namespace pascal_s2c
+{
 
-class Lexer {
-public:
-    TokenList tokenize(const std::string& source) const;
-};
+    class Lexer
+    {
+    public:
+        TokenList tokenize(const std::string &source) const;
+    };
 
-}  // namespace pascal_s2c
+} // namespace pascal_s2c
